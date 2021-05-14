@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
+    tools:context=".RegistrationFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="Registration"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Fullname"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/borderandradius"
+            android:id="@+id/registerfullname"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Address"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/borderandradius"
+            android:id="@+id/registeraddress"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Age"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/borderandradius"
+            android:id="@+id/registerage"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Contact"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/borderandradius"
+            android:id="@+id/registercontact"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Username"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/borderandradius"
+            android:id="@+id/registerusername"
+            android:visibility="gone"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Password"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/borderandradius"
+            android:id="@+id/registerpassword"
+            android:visibility="gone"
+            android:inputType="textPassword"/>
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:orientation="horizontal"
+                android:id="@+id/radiogroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radiovisitor"
+                    android:text="Visitor"
+                    android:checked="true"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioresident"
+                    android:text="Resident"
+                    />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioguard"
+                    android:text="Guard"
+                    />
+            </RadioGroup>
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/borderandradius"
+            android:text="Submit"
+            android:id="@+id/btnsubmit"/>
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>

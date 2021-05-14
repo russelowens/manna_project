@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:layout_margin="20dp">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/johny"
+        android:id="@+id/logo"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Johny Sins"
+        android:id="@+id/fullname"
+        android:layout_below="@+id/logo"
+        android:textSize="40dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Block 10 Lot 1"
+        android:id="@+id/blocklot"
+        android:layout_below="@+id/fullname"
+        android:textSize="20dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sinai Street"
+        android:id="@+id/street"
+        android:layout_below="@+id/blocklot"
+        android:textSize="20dp"
+        android:gravity="center"/>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/qr_sample"
+        android:id="@+id/qrcode"
+        android:layout_below="@+id/street"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:textSize="20dp"
+        android:id="@+id/btnback"
+        android:layout_below="@+id/qrcode"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2ac96a"/>
+
+</RelativeLayout>

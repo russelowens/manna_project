@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:padding="10dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fullname"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:id="@+id/fullname"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Block and Lot"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:id="@+id/blocklot"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact Number"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:id="@+id/contact"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date and Time"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:id="@+id/datetime"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="In or Out"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:id="@+id/inout"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

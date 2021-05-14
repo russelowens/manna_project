@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:layout_margin="20dp">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="20dp"
+        android:id="@+id/btnlogin"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2ac96a"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resident Registration"
+        android:textSize="20dp"
+        android:id="@+id/btnregisterresident"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2ac96a"
+        android:layout_below="@+id/btnlogin"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Visitor Registration"
+        android:textSize="20dp"
+        android:id="@+id/btnregistervisitor"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2ac96a"
+        android:layout_below="@+id/btnregisterresident"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        android:textSize="20dp"
+        android:id="@+id/btnscan"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2ac96a"
+        android:layout_below="@+id/btnregistervisitor"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Map"
+        android:textSize="20dp"
+        android:id="@+id/btnmap"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2ac96a"
+        android:layout_below="@+id/btnscan"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resident Profile"
+        android:textSize="20dp"
+        android:id="@+id/btnprofile"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2ac96a"
+        android:layout_below="@+id/btnmap"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resident List"
+        android:textSize="20dp"
+        android:id="@+id/btnresident"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2ac96a"
+        android:layout_below="@+id/btnprofile"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Visitor List"
+        android:textSize="20dp"
+        android:id="@+id/btnvisitor"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2ac96a"
+        android:layout_below="@+id/btnresident"/>
+
+</RelativeLayout>

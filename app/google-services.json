@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "912556636282",
+    "project_id": "ilista-dce8e",
+    "storage_bucket": "ilista-dce8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912556636282:android:ea71f219a0eeb3d767e3c3",
+        "android_client_info": {
+          "package_name": "com.example.mannaprototype"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912556636282-b4id49plpu65n2fp0jmt2u4m2b1mg5c3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAowGANly9gd4CcigbsNBIaFnjt1N6vLl8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912556636282-b4id49plpu65n2fp0jmt2u4m2b1mg5c3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
