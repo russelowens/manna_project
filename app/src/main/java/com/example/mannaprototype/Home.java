@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -61,6 +62,17 @@ public class Home extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
             return true;
         });
+
+        Menu menu = navigationView.getMenu();
+
+        if (resident.getUserType().equalsIgnoreCase("resident")) {
+            menu.findItem(R.id.btnregistration).setVisible(false);
+            menu.findItem(R.id.btnscan).setVisible(false);
+            menu.findItem(R.id.btnresident).setVisible(false);
+            menu.findItem(R.id.btnvisitor).setVisible(false);
+        }else if (resident.getUserType().equalsIgnoreCase("guard")) {
+            menu.findItem(R.id.btnprofile).setVisible(false);
+        }
 
         resident = (ResidentModel) getIntent().getSerializableExtra("resident");
 
