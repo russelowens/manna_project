@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(txtUsername, txtPass)
                     .addOnCompleteListener(task -> {
                        if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
+
+                           SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE);
+                           SharedPreferences.Editor editor = pref.edit();
+                           editor.putString("username", txtUsername);
+                           editor.putString("password", txtPass);
+                           editor.apply();
+
                            haveUser(task.getResult().getUser());
                        }else {
                            Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show();

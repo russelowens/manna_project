@@ -1,6 +1,7 @@
 package com.example.mannaprototype;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.UUID;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class RegistrationFragment extends Fragment {
     EditText registerfullname;
@@ -92,10 +95,13 @@ public class RegistrationFragment extends Fragment {
                 .addOnSuccessListener(v -> residents.document(v.getUser().getUid()).set(resident)
                         .addOnCompleteListener(task -> {
                            if(task.isSuccessful()) {
-                               // TODO: INSERT HERE THE P0AGE
-                               Intent intent = new Intent(getActivity(), Home.class);
-                               intent.putExtra("resident", resident);
-                               startActivity(intent);
+
+                               SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
+                               mAuth.signOut();
+                               mAuth.signInWithEmailAndPassword(pref.getString("username", null), pref.getString("password", null))
+                                       .addOnSuccessListener(task1 -> {
+                                           Toast.makeText(getActivity(), "Users successfully registered", Toast.LENGTH_LONG).show();
+                                       });
                            }else {
                                Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                            }
