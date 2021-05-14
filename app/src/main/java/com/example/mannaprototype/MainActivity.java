@@ -41,17 +41,17 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         nextbutton.setOnClickListener(v -> {
-            String txtUsername = username.getText().toString();
-            String txtPass = password.getText().toString();
-
-            mAuth.signInWithEmailAndPassword(txtUsername, txtPass)
-                    .addOnCompleteListener(task -> {
-                       if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
-                           haveUser(task.getResult().getUser());
-                       }else {
-                           // TODO: Show the invalid username and password message
-                       }
-                    });
+//            String txtUsername = username.getText().toString();
+//            String txtPass = password.getText().toString();
+//
+//            mAuth.signInWithEmailAndPassword(txtUsername, txtPass)
+//                    .addOnCompleteListener(task -> {
+//                       if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
+//                           haveUser(task.getResult().getUser());
+//                       }else {
+//                           // TODO: Show the invalid username and password message
+//                       }
+//                    });
         });
 
     }

@@ -1,5 +1,6 @@
 package com.example.mannaprototype;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -65,10 +66,6 @@ public class RegistrationFragment extends Fragment {
         registeraddress.setText(null);
         registerusername.setText(null);
         registerpassword.setText(null);
-        radiovisitor = view.findViewById(R.id.radiovisitor);
-        radioresident = view.findViewById(R.id.radioresident);
-        radioguard = view.findViewById(R.id.radioguard);
-        btnsubmit = view.findViewById(R.id.btnsubmit);
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
@@ -89,25 +86,19 @@ public class RegistrationFragment extends Fragment {
             });
     }
 
-    private void signup(String username, String password, String type, String address){
+    private void signup(String username, String password, ResidentModel resident){
         mAuth.createUserWithEmailAndPassword(username, password)
-                .addOnSuccessListener(v -> {
-                    HashMap<String, Object> resident = new HashMap<>();
-                    resident.put("type", type);
-                    resident.put("address", address);
-
-                    String uid = v.getUser().getUid();
-
-                    residents.document(uid).set(resident)
-                            .addOnCompleteListener(task -> {
-                               if(task.isSuccessful()) {
-                                   // TODO: INSERT HERE THE P0AGE
-                                   Log.e("LOGIN", "SUCCESS");
-                               }else {
-                                   Log.e("LOGIN", task.getException().getMessage());
-                               }
-                            });
-                })
+                .addOnSuccessListener(v -> residents.document(v.getUser().getUid()).set(resident)
+                        .addOnCompleteListener(task -> {
+                           if(task.isSuccessful()) {
+                               // TODO: INSERT HERE THE P0AGE
+                               Intent intent = new Intent(getActivity(), Home.class);
+                               intent.putExtra("resident", resident);
+                               startActivity(intent);
+                           }else {
+                               Log.e("LOGIN", task.getException().getMessage());
+                           }
+                        }))
                 .addOnFailureListener(v -> {
                     Log.e("LOGIN", v.getMessage());
                 });
@@ -181,8 +172,7 @@ public class RegistrationFragment extends Fragment {
                     resident.setUserType("Guard");
                 }
                 resident.setDateTime(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
-                CollectionReference collectioninout = FirebaseFirestore.getInstance().collection("residents");
-                collectioninout.add(resident);
+                signup(registerusername.getText().toString(), registerpassword.getText().toString(), resident);
                 Log.e("Success","Successfully registered!");
             }
             if(selectedId == R.id.radiovisitor){
