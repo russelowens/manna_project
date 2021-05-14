@@ -54,6 +54,7 @@ public class Home extends AppCompatActivity {
                 setFragment(new VisitorFragment());
             }else if(menuItem.getItemId() == R.id.btnlogout){
                 FirebaseAuth.getInstance().signOut();
+                finish();g
             }else{
                 setFragment(new HomeFragment());
             }
