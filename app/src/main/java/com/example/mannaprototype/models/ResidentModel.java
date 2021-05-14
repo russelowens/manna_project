@@ -1,6 +1,8 @@
 package com.example.mannaprototype.models;
 
-public class ResidentModel {
+import java.io.Serializable;
+
+public class ResidentModel implements Serializable {
     String idNumber;
     String fullName;
     String blockAndLot;
