@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mannaprototype.models.ResidentModel;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -29,6 +30,7 @@ public class ProfileFragment extends Fragment {
 //    Initialization
     TextView etInput;
     ImageView ivOutput;
+    ResidentModel resident;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -40,11 +42,12 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        resident = (ResidentModel) getActivity().getIntent().getSerializableExtra("resident");
 
 
         etInput = view.findViewById(R.id.resident_qrcode);
 //        etInput.setText(UUID.randomUUID().toString().toUpperCase());
-        etInput.setText(getActivity().getIntent().getExtras().getString("firstName"));
+        etInput.setText(resident.getIdNumber());
         ivOutput = view.findViewById(R.id.iv_output);
         qrCodeGenerator();
         return view;
