@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.mannaprototype.models.ResidentModel;
@@ -41,20 +42,17 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         nextbutton.setOnClickListener(v -> {
-//            String txtUsername = username.getText().toString();
-//            String txtPass = password.getText().toString();
-//
-//            mAuth.signInWithEmailAndPassword(txtUsername, txtPass)
-//                    .addOnCompleteListener(task -> {
-//                       if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
-//                           haveUser(task.getResult().getUser());
-//                       }else {
-//                           // TODO: Show the invalid username and password message
-//                       }
-//                    });
+            String txtUsername = username.getText().toString();
+            String txtPass = password.getText().toString();
 
-            Intent intent = new Intent(this, Home.class);
-            startActivity(intent);
+            mAuth.signInWithEmailAndPassword(txtUsername, txtPass)
+                    .addOnCompleteListener(task -> {
+                       if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
+                           haveUser(task.getResult().getUser());
+                       }else {
+                           Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show();
+                       }
+                    });
         });
 
     }
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                        ResidentModel resident = task.getResult().toObject(ResidentModel.class);
                        openActivity2(resident);
                    }else {
-                       // TODO: No existing user found
+                       Toast.makeText(this, "No existing user found", Toast.LENGTH_LONG).show();
                    }
                 });
     }

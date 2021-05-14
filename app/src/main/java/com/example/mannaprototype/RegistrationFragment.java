@@ -97,7 +97,7 @@ public class RegistrationFragment extends Fragment {
                                intent.putExtra("resident", resident);
                                startActivity(intent);
                            }else {
-                               Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG);
+                               Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                            }
                         }))
                 .addOnFailureListener(v -> {
