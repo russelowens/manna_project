@@ -16,6 +16,7 @@ import android.widget.Button;
 
 import com.example.mannaprototype.models.ResidentModel;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity {
     private DrawerLayout drawer;
@@ -52,7 +53,7 @@ public class Home extends AppCompatActivity {
             }else if(menuItem.getItemId() == R.id.btnvisitor){
                 setFragment(new VisitorFragment());
             }else if(menuItem.getItemId() == R.id.btnlogout){
-                openMainActivity();
+                FirebaseAuth.getInstance().signOut();
             }else{
                 setFragment(new HomeFragment());
             }

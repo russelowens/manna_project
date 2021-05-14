@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.mannaprototype.models.InOutModel;
 import com.example.mannaprototype.models.ResidentModel;
@@ -96,7 +97,7 @@ public class RegistrationFragment extends Fragment {
                                intent.putExtra("resident", resident);
                                startActivity(intent);
                            }else {
-                               Log.e("LOGIN", task.getException().getMessage());
+                               Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG);
                            }
                         }))
                 .addOnFailureListener(v -> {
@@ -174,8 +175,7 @@ public class RegistrationFragment extends Fragment {
                 resident.setDateTime(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
                 signup(registerusername.getText().toString(), registerpassword.getText().toString(), resident);
                 Log.e("Success","Successfully registered!");
-            }
-            if(selectedId == R.id.radiovisitor){
+            }else if(selectedId == R.id.radiovisitor){
                 InOutModel inout = new InOutModel();
                 inout.setIdNumber("");
                 inout.setFullName(registerfullname.getText().toString());
