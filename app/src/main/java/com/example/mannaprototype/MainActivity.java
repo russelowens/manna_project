@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
 //                           // TODO: Show the invalid username and password message
 //                       }
 //                    });
+
+            Intent intent = new Intent(this, Home.class);
+            startActivity(intent);
         });
 
     }
@@ -78,9 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivity2(ResidentModel resident){
         Intent intent = new Intent(this, Home.class);
-                        intent.putExtra("resident", resident);
-                        startActivity(intent);
-
+        intent.putExtra("resident", resident);
         startActivity(intent);
     }
 }
