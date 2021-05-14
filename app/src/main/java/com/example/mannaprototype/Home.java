@@ -40,6 +40,8 @@ public class Home extends AppCompatActivity {
         transaction.replace(R.id.myframelayout, new HomeFragment());
         transaction.commit();
 
+        resident = (ResidentModel) getIntent().getSerializableExtra("resident");
+
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             if(menuItem.getItemId() == R.id.btnhome){
                 setFragment(new HomeFragment());
@@ -73,8 +75,6 @@ public class Home extends AppCompatActivity {
         }else if (resident.getUserType().equalsIgnoreCase("guard")) {
             menu.findItem(R.id.btnprofile).setVisible(false);
         }
-
-        resident = (ResidentModel) getIntent().getSerializableExtra("resident");
 
     }
 
