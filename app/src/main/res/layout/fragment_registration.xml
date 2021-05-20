@@ -82,6 +82,7 @@
             android:id="@+id/registerpassword"
             android:visibility="gone"
             android:inputType="textPassword"/>
+
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"

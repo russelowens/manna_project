@@ -1,5 +1,6 @@
 package com.example.mannaprototype;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
             String txtUsername = username.getText().toString();
             String txtPass = password.getText().toString();
 
+            ProgressDialog dialog = ProgressDialog.show(this, "",
+                    "Loading. Please wait...", true);
+
             mAuth.signInWithEmailAndPassword(txtUsername, txtPass)
                     .addOnCompleteListener(task -> {
                        if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
                            haveUser(task.getResult().getUser());
                        }else {
+                           dialog.dismiss();
                            Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show();
                        }
                     });

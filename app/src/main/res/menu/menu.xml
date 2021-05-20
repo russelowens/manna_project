@@ -21,15 +21,15 @@
             android:title="Scan" />
         <item
             android:id="@+id/btnresident"
-            android:icon="@drawable/ic_list"
+            android:icon="@drawable/ic_baseline_group_24"
             android:title="Users List" />
         <item
             android:id="@+id/btnvisitor"
-            android:icon="@drawable/ic_list"
+            android:icon="@drawable/ic_baseline_account_box_24"
             android:title="Logbook" />
         <item
             android:id="@+id/btnlogout"
-            android:icon="@drawable/ic_list"
+            android:icon="@drawable/ic_power"
             android:title="Logout" />
     </group>
 </menu>

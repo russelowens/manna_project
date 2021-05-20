@@ -22,6 +22,7 @@
         android:background="@drawable/borderandradius"
         android:padding="10dp"
         android:layout_below="@+id/logo"
+        android:inputType="textEmailAddress"
         android:layout_marginTop="20dp"/>
 
     <EditText
@@ -32,17 +33,18 @@
         android:background="@drawable/borderandradius"
         android:padding="10dp"
         android:layout_below="@+id/username"
+        android:inputType="textPassword"
         android:layout_marginTop="20dp"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textAllCaps="false"
         android:id="@+id/btnlogin"
+        android:paddingVertical="8dp"
         android:layout_below="@+id/password"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#2ac96a"/>
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

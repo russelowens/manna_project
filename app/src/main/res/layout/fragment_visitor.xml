@@ -10,9 +10,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textStyle="bold"
-        android:text="Logbook"
+        android:text="Visitor Logbook"
         android:gravity="center"
         android:id="@+id/visitorheader"/>
 

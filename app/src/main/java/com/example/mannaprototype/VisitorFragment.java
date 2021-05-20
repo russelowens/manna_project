@@ -51,19 +51,17 @@ public class VisitorFragment extends Fragment {
 
 
         firebaseFirestore.collection("inout")
+                .orderBy("dateTime", Query.Direction.DESCENDING)
 //                .whereEqualTo("age", "55")
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.e("Results",document.getId() + " => " + document.getData());
-                                testingOnly += document.getData().get("contact").toString();
-                            }
-                        } else {
-                            Log.e("Error","Something went wrong");
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.e("Results",document.getId() + " => " + document.getData());
+                            testingOnly += document.getData().get("contact").toString();
                         }
+                    } else {
+                        Log.e("Error","Something went wrong");
                     }
                 });
 

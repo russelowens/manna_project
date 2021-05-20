@@ -20,6 +20,7 @@ import com.example.mannaprototype.models.InOutModel;
 import com.example.mannaprototype.models.ResidentModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -190,7 +191,7 @@ public class RegistrationFragment extends Fragment {
                 inout.setContact(registercontact.getText().toString());
                 inout.setUserType("Visitor");
                 inout.setInout("IN");
-                inout.setDateTime(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
+                inout.setDateTime(FieldValue.serverTimestamp());
                 CollectionReference collectioninout = FirebaseFirestore.getInstance().collection("inout");
                 collectioninout.add(inout);
                 Log.e("Success","Successfully registered!");

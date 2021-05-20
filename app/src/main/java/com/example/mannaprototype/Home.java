@@ -1,23 +1,40 @@
 package com.example.mannaprototype;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.textservice.TextInfo;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.mannaprototype.models.InOutModel;
 import com.example.mannaprototype.models.ResidentModel;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class Home extends AppCompatActivity {
     private DrawerLayout drawer;
@@ -108,5 +125,52 @@ public class Home extends AppCompatActivity {
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         t.replace(R.id.myframelayout, fragment);
         t.commit();
+    }
+
+    private boolean isValidatedForm(List<TextInputEditText> editTexts) {
+        for (int i = 0; i < editTexts.size(); i++) {
+            if (editTexts.get(i) != null && editTexts.get(i).getText() != null &&
+                    editTexts.get(i).getText().toString().trim().length() == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void fab(View view) {
+        View v = LayoutInflater.from(this).inflate(R.layout.new_visitor_layout, null);
+        TextInputEditText fullNameEdit = v.findViewById(R.id.fullname);
+        TextInputEditText addressEdit = v.findViewById(R.id.address);
+        TextInputEditText ageEdit = v.findViewById(R.id.age);
+        TextInputEditText contactEdit = v.findViewById(R.id.contact);
+
+        List<TextInputEditText> editTexts = new ArrayList<>();
+        editTexts.add(fullNameEdit); editTexts.add(addressEdit); editTexts.add(ageEdit); editTexts.add(contactEdit);
+
+        new AlertDialog.Builder(this)
+                .setTitle("New Visitor")
+                .setView(v)
+                .setPositiveButton("SUBMIT", (dialog, which) -> {
+
+                    if (isValidatedForm(editTexts)) {
+
+                        InOutModel inOutModel = new InOutModel();
+                        inOutModel.setFullName(fullNameEdit.getText().toString());
+                        inOutModel.setBlockAndLot(addressEdit.getText().toString());
+                        inOutModel.setAge(ageEdit.getText().toString());
+                        inOutModel.setContact(contactEdit.getText().toString());
+                        inOutModel.setUserType("Visitor");
+                        inOutModel.setInout("IN");
+                        inOutModel.setDateTime(FieldValue.serverTimestamp());
+                        CollectionReference collectionInOut = FirebaseFirestore.getInstance().collection("inout");
+                        collectionInOut.add(inOutModel);
+
+                    }else {
+                        Toast.makeText(this, "Please complete the form to proceed", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("CANCEL", null)
+                .setCancelable(false)
+                .show();
     }
 }

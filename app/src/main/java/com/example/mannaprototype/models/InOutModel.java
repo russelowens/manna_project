@@ -1,12 +1,13 @@
 package com.example.mannaprototype.models;
 
-import java.sql.Timestamp;
+import com.google.firebase.firestore.ServerTimestamp;
+import com.google.type.Date;
 
 public class InOutModel {
     String idNumber;
     String fullName;
     String blockAndLot;
-    String dateTime;
+    @ServerTimestamp Object dateTime;
     String age;
     String contact;
     String userType;
@@ -14,7 +15,7 @@ public class InOutModel {
 
     public InOutModel(){}
 
-    public InOutModel(String idNumber, String fullName, String blockAndLot, String dateTime, String age, String contact, String userType, String inout) {
+    public InOutModel(String idNumber, String fullName, String blockAndLot, Date dateTime, String age, String contact, String userType, String inout) {
         this.idNumber = idNumber;
         this.fullName = fullName;
         this.blockAndLot = blockAndLot;
@@ -24,7 +25,6 @@ public class InOutModel {
         this.userType = userType;
         this.inout = inout;
     }
-
 
     public String getIdNumber() {
         return idNumber;
@@ -48,11 +48,11 @@ public class InOutModel {
         this.blockAndLot = blockAndLot;
     }
 
-    public String getDateTime() {
+    public Object getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(String dateTime) {
+    public void setDateTime(Object dateTime) {
         this.dateTime = dateTime;
     }
 
