@@ -54,7 +54,7 @@ public class RegistrationFragment extends Fragment {
         registeraddress= view.findViewById(R.id.registeraddress);
         registerusername = view.findViewById(R.id.registerusername);
         registerpassword = view.findViewById(R.id.registerpassword);
-        radiovisitor = view.findViewById(R.id.radiovisitor);
+//        radiovisitor = view.findViewById(R.id.radiovisitor);
         radioresident = view.findViewById(R.id.radioresident);
         radioguard = view.findViewById(R.id.radioguard);
         radiogroup = view.findViewById(R.id.radiogroup);
@@ -145,12 +145,12 @@ public class RegistrationFragment extends Fragment {
 
         forinit(view);
 
-        radiovisitor.setOnClickListener(v -> {
-            registerusername.setVisibility(View.GONE);
-            registerpassword.setVisibility(View.GONE);
-            registeraddress.setHint("Address");
-            clearData(view);
-        });
+//        radiovisitor.setOnClickListener(v -> {
+//            registerusername.setVisibility(View.GONE);
+//            registerpassword.setVisibility(View.GONE);
+//            registeraddress.setHint("Address");
+//            clearData(view);
+//        });
         radioresident.setOnClickListener(v -> {
             registerusername.setVisibility(View.VISIBLE);
             registerpassword.setVisibility(View.VISIBLE);
@@ -182,20 +182,21 @@ public class RegistrationFragment extends Fragment {
                 resident.setDateTime(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
                 signup(registerusername.getText().toString(), registerpassword.getText().toString(), resident);
                 Log.e("Success","Successfully registered!");
-            }else if(selectedId == R.id.radiovisitor){
-                InOutModel inout = new InOutModel();
-                inout.setIdNumber("");
-                inout.setFullName(registerfullname.getText().toString());
-                inout.setBlockAndLot(registeraddress.getText().toString());
-                inout.setAge(registerage.getText().toString());
-                inout.setContact(registercontact.getText().toString());
-                inout.setUserType("Visitor");
-                inout.setInout("IN");
-                inout.setDateTime(FieldValue.serverTimestamp());
-                CollectionReference collectioninout = FirebaseFirestore.getInstance().collection("inout");
-                collectioninout.add(inout);
-                Log.e("Success","Successfully registered!");
             }
+//            else if(selectedId == R.id.radiovisitor){
+//                InOutModel inout = new InOutModel();
+//                inout.setIdNumber("");
+//                inout.setFullName(registerfullname.getText().toString());
+//                inout.setBlockAndLot(registeraddress.getText().toString());
+//                inout.setAge(registerage.getText().toString());
+//                inout.setContact(registercontact.getText().toString());
+//                inout.setUserType("Visitor");
+//                inout.setInout("IN");
+//                inout.setDateTime(FieldValue.serverTimestamp());
+//                CollectionReference collectioninout = FirebaseFirestore.getInstance().collection("inout");
+//                collectioninout.add(inout);
+//                Log.e("Success","Successfully registered!");
+//            }
             clearData(view);
         });
 

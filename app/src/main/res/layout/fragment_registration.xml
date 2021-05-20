@@ -69,8 +69,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/borderandradius"
-            android:id="@+id/registerusername"
-            android:visibility="gone"/>
+            android:id="@+id/registerusername"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -80,7 +79,6 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/borderandradius"
             android:id="@+id/registerpassword"
-            android:visibility="gone"
             android:inputType="textPassword"/>
 
         <LinearLayout
@@ -95,18 +93,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/radiovisitor"
-                    android:text="Visitor"
-                    android:checked="true"
-                    />
+<!--                <RadioButton-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:id="@+id/radiovisitor"-->
+<!--                    android:text="Visitor"-->
+<!--                    />-->
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/radioresident"
                     android:text="Resident"
+                    android:checked="true"
                     />
                 <RadioButton
                     android:layout_width="wrap_content"

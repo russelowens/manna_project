@@ -89,7 +89,7 @@ public class VisitorFragment extends Fragment {
                 holder.fullName.setText(model.getFullName()+" - "+model.getUserType());
                 holder.blockLot.setText(model.getBlockAndLot());
                 holder.contact.setText(model.getContact());
-                holder.datetime.setText(model.getDateTime());
+                holder.datetime.setText(model.getDateTime().toString());
                 holder.inout.setText(model.getInout());
                 Log.e("Recycler View", String.valueOf(position));
             }
