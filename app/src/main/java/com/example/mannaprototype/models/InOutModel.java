@@ -7,7 +7,7 @@ public class InOutModel {
     String idNumber;
     String fullName;
     String blockAndLot;
-    @ServerTimestamp Object dateTime;
+    Object dateTime;
     String age;
     String contact;
     String userType;
@@ -15,7 +15,7 @@ public class InOutModel {
 
     public InOutModel(){}
 
-    public InOutModel(String idNumber, String fullName, String blockAndLot, Date dateTime, String age, String contact, String userType, String inout) {
+    public InOutModel(String idNumber, String fullName, String blockAndLot, Object dateTime, String age, String contact, String userType, String inout) {
         this.idNumber = idNumber;
         this.fullName = fullName;
         this.blockAndLot = blockAndLot;
@@ -24,6 +24,14 @@ public class InOutModel {
         this.contact = contact;
         this.userType = userType;
         this.inout = inout;
+    }
+
+    public Object getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Object dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getIdNumber() {
@@ -46,14 +54,6 @@ public class InOutModel {
 
     public void setBlockAndLot(String blockAndLot) {
         this.blockAndLot = blockAndLot;
-    }
-
-    public Object getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(Object dateTime) {
-        this.dateTime = dateTime;
     }
 
     public String getUserType() {

@@ -116,7 +116,6 @@ public class ScanFragment extends Fragment {
                                     inout.setAge(document.getData().get("age").toString());
                                     inout.setInout("IN");
                                     inout.setUserType("Resident");
-                                    inout.setDateTime(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
                                     CollectionReference collectioninout = FirebaseFirestore.getInstance().collection("inout");
                                     collectioninout.add(inout);
                                 }

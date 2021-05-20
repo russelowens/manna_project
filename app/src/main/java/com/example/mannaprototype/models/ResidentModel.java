@@ -1,12 +1,16 @@
 package com.example.mannaprototype.models;
 
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class ResidentModel implements Serializable {
     String idNumber;
     String fullName;
     String blockAndLot;
-    String dateTime;
+    Object dateTime;
     String age;
     String contact;
     String userName;
@@ -15,7 +19,7 @@ public class ResidentModel implements Serializable {
 
     public ResidentModel(){}
 
-    public ResidentModel(String idNumber, String fullName, String blockAndLot, String dateTime, String age, String contact, String userName, String password, String userType) {
+    public ResidentModel(String idNumber, String fullName, String blockAndLot, Object dateTime, String age, String contact, String userName, String password, String userType) {
         this.idNumber = idNumber;
         this.fullName = fullName;
         this.blockAndLot = blockAndLot;
@@ -25,6 +29,14 @@ public class ResidentModel implements Serializable {
         this.userName = userName;
         this.password = password;
         this.userType = userType;
+    }
+
+    public Object getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Object dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getIdNumber() {
@@ -51,13 +63,6 @@ public class ResidentModel implements Serializable {
         this.blockAndLot = blockAndLot;
     }
 
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
 
     public String getAge() {
         return age;

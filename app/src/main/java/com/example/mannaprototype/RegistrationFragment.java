@@ -167,7 +167,6 @@ public class RegistrationFragment extends Fragment {
             int selectedId = radiogroup.getCheckedRadioButtonId();
             if(selectedId == R.id.radioresident || selectedId == R.id.radioguard){
                 ResidentModel resident = new ResidentModel();
-                resident.setIdNumber(UUID.randomUUID().toString().toUpperCase());
                 resident.setFullName(registerfullname.getText().toString());
                 resident.setBlockAndLot(registeraddress.getText().toString());
                 resident.setAge(registerage.getText().toString());
@@ -179,7 +178,6 @@ public class RegistrationFragment extends Fragment {
                 }else{
                     resident.setUserType("Guard");
                 }
-                resident.setDateTime(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
                 signup(registerusername.getText().toString(), registerpassword.getText().toString(), resident);
                 Log.e("Success","Successfully registered!");
             }else if(selectedId == R.id.radiovisitor){
@@ -191,7 +189,6 @@ public class RegistrationFragment extends Fragment {
                 inout.setContact(registercontact.getText().toString());
                 inout.setUserType("Visitor");
                 inout.setInout("IN");
-                inout.setDateTime(FieldValue.serverTimestamp());
                 CollectionReference collectioninout = FirebaseFirestore.getInstance().collection("inout");
                 collectioninout.add(inout);
                 Log.e("Success","Successfully registered!");
