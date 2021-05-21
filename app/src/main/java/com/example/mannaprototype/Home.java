@@ -111,7 +111,7 @@ public class Home extends AppCompatActivity {
         }
 
         FirebaseFirestore.getInstance().collection("notifications")
-                .whereEqualTo("resident_id", FirebaseAuth.getInstance().getUid())
+                .whereEqualTo("resident_id", FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .limit(1)
                 .addSnapshotListener((value, error) -> {
