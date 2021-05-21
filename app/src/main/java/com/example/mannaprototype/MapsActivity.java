@@ -37,6 +37,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
         FirebaseFirestore.getInstance().collection("residents")
                 .whereEqualTo("userType", "Resident")
                 .get()
