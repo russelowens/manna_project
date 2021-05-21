@@ -99,7 +99,7 @@ public class VisitorFragment extends Fragment {
                 holder.fullName.setText(model.getFullName()+" - "+model.getUserType());
                 holder.blockLot.setText(model.getBlockAndLot());
                 holder.contact.setText(model.getContact());
-                holder.datetime.setText(model.getDateTime().toString());
+                holder.datetime.setText(model.getDateTime() != null ? model.getDateTime().toString() : "");
                 holder.inout.setText(model.getInout());
 
                 if (model.getUserType().equalsIgnoreCase("visitor") && model.getInout().equalsIgnoreCase("IN")) {

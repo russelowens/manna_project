@@ -128,6 +128,7 @@ public class ResidentFragment extends Fragment {
                         FirebaseFirestore.getInstance().collection("inout")
                                 .whereEqualTo("idNumber", model.getIdNumber())
                                 .whereEqualTo("inout", "IN")
+                                .whereEqualTo("userType", "Visitor")
                                 .get()
                                 .addOnCompleteListener(task -> {
                                     dialog.dismiss();
