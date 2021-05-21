@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
             mAuth.signInWithEmailAndPassword(txtUsername, txtPass)
                     .addOnCompleteListener(task -> {
+                        dialog.dismiss();
                        if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
 
                            SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -53,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
                            haveUser(task.getResult().getUser());
                        }else {
-                           dialog.dismiss();
                            Toast.makeText(this, "Invalid username or password", Toast.LENGTH_LONG).show();
                        }
                     });

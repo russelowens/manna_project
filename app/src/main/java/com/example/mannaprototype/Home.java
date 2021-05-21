@@ -217,6 +217,7 @@ public class Home extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
+                        residentModels.clear();
                         task.getResult().getDocuments().forEach(documentSnapshot -> {
                             ResidentModel resident = documentSnapshot.toObject(ResidentModel.class);
                             if (resident != null) {
