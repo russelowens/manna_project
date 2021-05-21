@@ -15,7 +15,7 @@
         <item
             android:id="@+id/btnregistration"
             android:icon="@drawable/ic_plus"
-            android:title="Resident Registration"/>
+            android:title="Registration"/>
         <item
             android:id="@+id/btnscan"
             android:icon="@drawable/ic_scan"
