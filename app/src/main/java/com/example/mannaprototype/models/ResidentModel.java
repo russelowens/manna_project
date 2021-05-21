@@ -17,11 +17,11 @@ public class ResidentModel implements Serializable {
     String password;
     String userType;
     String status;
-    Long latitude, longitude;
+    Double latitude, longitude;
 
     public ResidentModel(){}
 
-    public ResidentModel(String idNumber, String fullName, String blockAndLot, Object dateTime, String age, String contact, String userName, String password, String userType, String status, Long latitude, Long longitude) {
+    public ResidentModel(String idNumber, String fullName, String blockAndLot, Object dateTime, String age, String contact, String userName, String password, String userType, String status, Double latitude, Double longitude) {
         this.idNumber = idNumber;
         this.fullName = fullName;
         this.blockAndLot = blockAndLot;
@@ -44,19 +44,19 @@ public class ResidentModel implements Serializable {
         this.status = status;
     }
 
-    public Long getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Long getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 

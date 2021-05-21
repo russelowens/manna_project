@@ -96,23 +96,24 @@ public class RegistrationFragment extends Fragment {
 
     private void signup(String username, String password, ResidentModel resident){
         mAuth.createUserWithEmailAndPassword(username, password)
-                .addOnSuccessListener(v -> residents.document(v.getUser().getUid()).set(resident)
-                        .addOnCompleteListener(task -> {
-                           if(task.isSuccessful()) {
+                .addOnSuccessListener(v -> {
+                    resident.setIdNumber(v.getUser().getUid());
+                    residents.document(v.getUser().getUid()).set(resident)
+                            .addOnCompleteListener(task -> {
+                                if(task.isSuccessful()) {
 
-                               SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
-                               mAuth.signOut();
-                               mAuth.signInWithEmailAndPassword(pref.getString("username", null), pref.getString("password", null))
-                                       .addOnSuccessListener(task1 -> {
-                                           Toast.makeText(getActivity(), "Users successfully registered", Toast.LENGTH_LONG).show();
-                                       });
-                           }else {
-                               Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                           }
-                        }))
-                .addOnFailureListener(v -> {
-                    Log.e("LOGIN", v.getMessage());
-                });
+                                    SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
+                                    mAuth.signOut();
+                                    mAuth.signInWithEmailAndPassword(pref.getString("username", null), pref.getString("password", null))
+                                            .addOnSuccessListener(task1 -> {
+                                                Toast.makeText(getActivity(), "Users successfully registered", Toast.LENGTH_LONG).show();
+                                            });
+                                }else {
+                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                })
+                .addOnFailureListener(v -> Log.e("LOGIN", v.getMessage()));
     }
 
     private void visitor_registration(String fullname, String address, String age, String contact, String username, String password){
@@ -183,8 +184,8 @@ public class RegistrationFragment extends Fragment {
                 resident.setDateTime(FieldValue.serverTimestamp());
                 if(selectedId == R.id.radioresident){
                     resident.setUserType("Resident");
-                    resident.setLatitude(Long.valueOf(editLatitude.getText().toString()));
-                    resident.setLongitude(Long.valueOf(editLongitude.getText().toString()));
+                    resident.setLatitude(Double.parseDouble(editLatitude.getText().toString()));
+                    resident.setLongitude(Double.parseDouble(editLongitude.getText().toString()));
                     resident.setStatus("IN");
                 }else{
                     resident.setUserType("Guard");
