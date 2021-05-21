@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group
         android:id="@+id/group1"
         android:checkableBehavior="single">
@@ -22,14 +23,18 @@
         <item
             android:id="@+id/btnresident"
             android:icon="@drawable/ic_baseline_group_24"
-            android:title="Users List" />
+            android:title="Residents &amp; Guards" />
         <item
             android:id="@+id/btnvisitor"
             android:icon="@drawable/ic_baseline_account_box_24"
             android:title="Logbook" />
         <item
+            android:enabled="false"
+            android:icon="@null"
+            android:title="" />
+        <item
             android:id="@+id/btnlogout"
             android:icon="@drawable/ic_power"
-            android:title="Logout" />
+            android:title="Sign out" />
     </group>
 </menu>

@@ -139,26 +139,58 @@ public class Home extends AppCompatActivity {
     private void actionVisitor(Notification notification) {
         ProgressDialog dialog = ProgressDialog.show(this, "",
                 "Loading. Please wait...", true);
-        FirebaseFirestore.getInstance().collection("residents").document(notification.getResident_id()).get()
+        FirebaseFirestore.getInstance().collection("inout").document(notification.getInout_id()).get()
                 .addOnCompleteListener(task -> {
                     dialog.dismiss();
                     if (task.isComplete() && task.isSuccessful() && task.getResult() != null){
-                        ResidentModel residentModel = task.getResult().toObject(ResidentModel.class);
+                        InOutModel inOutModel = task.getResult().toObject(InOutModel.class);
                         new AlertDialog.Builder(this)
                                 .setTitle("New Visitor")
-                                .setMessage(residentModel.getFullName() + "\n" + residentModel.getBlockAndLot() + "\nDo you want to accept this visitor?")
+                                .setMessage(inOutModel.getFullName() + "\n" + inOutModel.getBlockAndLot() + "\nDo you want to accept this visitor?")
                                 .setNeutralButton("CANCEL", null)
                                 .setNegativeButton("REJECT", (dialog1, which) -> {
                                     Map<String, Object> update = new HashMap<>();
-                                    update.put("status", "reject");
+                                    update.put("inout", "REJECTED");
                                     FirebaseFirestore.getInstance().collection("inout").document(notification.getInout_id()).set(update, SetOptions.merge());
+
+
+                                    FirebaseFirestore.getInstance().collection("notifications")
+                                            .whereEqualTo("inout_id", notification.getInout_id())
+                                            .whereEqualTo("visitor_name", notification.getVisitor_name())
+                                            .whereEqualTo("done", notification.isDone())
+                                            .limit(1)
+                                            .get()
+                                            .addOnCompleteListener(task1 -> {
+                                                if (task1.isComplete() && task1.isSuccessful() && task1.getResult() != null) {
+                                                    Map<String, Object> update1 = new HashMap<>();
+                                                    update1.put("done", true);
+                                                    FirebaseFirestore.getInstance().collection("notifications").document(task1.getResult().getDocuments().get(0).getId())
+                                                            .set(update1, SetOptions.merge());
+                                                }
+                                            });
+
                                     Toast.makeText(this, "Visitor has been rejected", Toast.LENGTH_SHORT).show();
                                 })
                                 .setPositiveButton("ACCEPT", (dialog1, which) -> {
                                     Map<String, Object> update = new HashMap<>();
-                                    update.put("status", "accept");
+                                    update.put("inout", "IN");
                                     FirebaseFirestore.getInstance().collection("inout").document(notification.getInout_id()).set(update, SetOptions.merge());
                                     Toast.makeText(this, "Visitor has been accepted", Toast.LENGTH_SHORT).show();
+
+                                    FirebaseFirestore.getInstance().collection("notifications")
+                                            .whereEqualTo("inout_id", notification.getInout_id())
+                                            .whereEqualTo("visitor_name", notification.getVisitor_name())
+                                            .whereEqualTo("done", notification.isDone())
+                                            .limit(1)
+                                            .get()
+                                            .addOnCompleteListener(task1 -> {
+                                                if (task1.isComplete() && task1.isSuccessful() && task1.getResult() != null) {
+                                                    Map<String, Object> update1 = new HashMap<>();
+                                                    update1.put("done", true);
+                                                    FirebaseFirestore.getInstance().collection("notifications").document(task1.getResult().getDocuments().get(0).getId())
+                                                            .set(update1, SetOptions.merge());
+                                                }
+                                            });
                                 })
                                 .show();
                     }
@@ -179,7 +211,10 @@ public class Home extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        FirebaseFirestore.getInstance().collection("residents").get()
+        FirebaseFirestore.getInstance().collection("residents")
+                .whereEqualTo("userType", "Resident")
+                .whereEqualTo("status", "IN")
+                .get()
                 .addOnCompleteListener(task -> {
                     if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
                         task.getResult().getDocuments().forEach(documentSnapshot -> {
@@ -214,6 +249,10 @@ public class Home extends AppCompatActivity {
                 return true;
             case R.id.notification:
                 startActivity(new Intent(Home.this, NotificationActivity.class));
+                return true;
+            case R.id.map:
+                startActivity(new Intent(Home.this, MapsActivity.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -283,7 +322,7 @@ public class Home extends AppCompatActivity {
                         inOutModel.setAge(ageEdit.getText().toString());
                         inOutModel.setContact(contactEdit.getText().toString());
                         inOutModel.setUserType("Visitor");
-                        inOutModel.setInout("IN");
+                        inOutModel.setInout("Pending");
                         inOutModel.setDateTime(FieldValue.serverTimestamp());
                         CollectionReference collectionInOut = mFirestore.collection("inout");
                         CollectionReference notifications = mFirestore.collection("notifications");

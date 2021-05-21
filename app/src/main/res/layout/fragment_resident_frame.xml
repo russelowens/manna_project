@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ResidentFragment"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,6 +15,29 @@
         android:textStyle="bold"
         android:text="Users List"
         android:gravity="center"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="12dp"
+        android:hint="Filter User">
+
+        <AutoCompleteTextView
+            android:id="@+id/filled_exposed_dropdown"
+            android:layout_width="match_parent"
+            android:editable="false"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:layout_width="wrap_content"
+        android:text="Show Inactive"
+        android:id="@+id/showActive"
+        android:visibility="gone"
+        android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

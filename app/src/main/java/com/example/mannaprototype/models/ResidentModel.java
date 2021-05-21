@@ -16,10 +16,12 @@ public class ResidentModel implements Serializable {
     String userName;
     String password;
     String userType;
+    String status;
+    Long latitude, longitude;
 
     public ResidentModel(){}
 
-    public ResidentModel(String idNumber, String fullName, String blockAndLot, Object dateTime, String age, String contact, String userName, String password, String userType) {
+    public ResidentModel(String idNumber, String fullName, String blockAndLot, Object dateTime, String age, String contact, String userName, String password, String userType, String status, Long latitude, Long longitude) {
         this.idNumber = idNumber;
         this.fullName = fullName;
         this.blockAndLot = blockAndLot;
@@ -29,6 +31,33 @@ public class ResidentModel implements Serializable {
         this.userName = userName;
         this.password = password;
         this.userType = userType;
+        this.status = status;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
+    public Long getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Long longitude) {
+        this.longitude = longitude;
     }
 
     public Object getDateTime() {

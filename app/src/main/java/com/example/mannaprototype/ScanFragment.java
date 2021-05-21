@@ -26,13 +26,16 @@ import com.example.mannaprototype.models.Scan;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.zxing.Result;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -100,28 +103,42 @@ public class ScanFragment extends Fragment {
             Log.e("QR RESULT", result.getText());
 
             firebaseFirestore.collection("residents")
-                .whereEqualTo("idNumber", result.getText())
+                    .whereEqualTo("idNumber", result.getText())
+                    .limit(1)
                     .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Log.e("Results",document.getId() + " => " + document.getData());
-                                    InOutModel inout = new InOutModel();
-                                    inout.setIdNumber(result.getText());
-                                    inout.setFullName(document.getData().get("fullName").toString());
-                                    inout.setBlockAndLot(document.getData().get("blockAndLot").toString());
-                                    inout.setContact(document.getData().get("contact").toString());
-                                    inout.setAge(document.getData().get("age").toString());
-                                    inout.setInout("IN");
-                                    inout.setUserType("Resident");
-                                    CollectionReference collectioninout = FirebaseFirestore.getInstance().collection("inout");
-                                    collectioninout.add(inout);
-                                }
-                            } else {
-                                Log.e("Error","Something went wrong");
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && task.isSuccessful() && task.getResult() != null && task.getResult().size() > 0) {
+
+                            DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                            Log.e("Results",document.getId() + " => " + document.getData());
+
+                            ResidentModel residentModel = document.toObject(ResidentModel.class);
+                            if (residentModel == null) {
+                                Toast.makeText(getActivity(), "Resident did not exist", Toast.LENGTH_LONG).show();
+                                return;
                             }
+
+                            String status = residentModel.getStatus() == null ? "IN" : (residentModel.getStatus().equals("IN") ? "OUT" : "IN");
+
+                            InOutModel inout = new InOutModel();
+                            inout.setIdNumber(result.getText());
+                            inout.setFullName(residentModel.getFullName());
+                            inout.setBlockAndLot(residentModel.getBlockAndLot());
+                            inout.setContact(residentModel.getContact());
+                            inout.setAge(residentModel.getContact());
+                            inout.setInout(status);
+                            inout.setUserType("Resident");
+
+                            FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+
+                            mFirestore.collection("inout").add(inout);
+
+                            Map<String, Object> update = new HashMap<>();
+                            update.put("status", status);
+                            mFirestore.collection("residents").document(document.getId()).set(update, SetOptions.merge());
+
+                        } else {
+                            Log.e("Error","Something went wrong");
                         }
                     });
 

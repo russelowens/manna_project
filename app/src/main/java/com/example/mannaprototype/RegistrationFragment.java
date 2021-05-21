@@ -1,31 +1,28 @@
 package com.example.mannaprototype;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.mannaprototype.models.InOutModel;
+import androidx.fragment.app.Fragment;
+
 import com.example.mannaprototype.models.ResidentModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.UUID;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -36,6 +33,7 @@ public class RegistrationFragment extends Fragment {
     EditText registeraddress;
     EditText registerusername;
     EditText registerpassword;
+    EditText editLatitude, editLongitude;
     RadioButton radiovisitor;
     RadioButton radioresident;
     RadioButton radioguard;
@@ -60,6 +58,9 @@ public class RegistrationFragment extends Fragment {
         radiogroup = view.findViewById(R.id.radiogroup);
         btnsubmit = view.findViewById(R.id.btnsubmit);
 
+        editLatitude = view.findViewById(R.id.latitude);
+        editLongitude = view.findViewById(R.id.longitude);
+
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
         residents = mFirestore.collection("residents");
@@ -71,6 +72,8 @@ public class RegistrationFragment extends Fragment {
         registeraddress.setText(null);
         registerusername.setText(null);
         registerpassword.setText(null);
+        editLongitude.setText(null);
+        editLatitude.setText(null);
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
@@ -155,12 +158,16 @@ public class RegistrationFragment extends Fragment {
             registerusername.setVisibility(View.VISIBLE);
             registerpassword.setVisibility(View.VISIBLE);
             registeraddress.setHint("Lot and Block");
+            editLatitude.setVisibility(View.VISIBLE);
+            editLongitude.setVisibility(View.VISIBLE);
             clearData(view);
         });
         radioguard.setOnClickListener(v -> {
             registerusername.setVisibility(View.VISIBLE);
             registerpassword.setVisibility(View.VISIBLE);
             registeraddress.setHint("Address");
+            editLatitude.setVisibility(View.GONE);
+            editLongitude.setVisibility(View.GONE);
             clearData(view);
         });
         btnsubmit.setOnClickListener(v -> {
@@ -173,8 +180,12 @@ public class RegistrationFragment extends Fragment {
                 resident.setContact(registercontact.getText().toString());
                 resident.setUserName(registerusername.getText().toString());
                 resident.setPassword(registerpassword.getText().toString());
+                resident.setDateTime(FieldValue.serverTimestamp());
                 if(selectedId == R.id.radioresident){
                     resident.setUserType("Resident");
+                    resident.setLatitude(Long.valueOf(editLatitude.getText().toString()));
+                    resident.setLongitude(Long.valueOf(editLongitude.getText().toString()));
+                    resident.setStatus("IN");
                 }else{
                     resident.setUserType("Guard");
                 }
