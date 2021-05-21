@@ -208,9 +208,9 @@ public class Home extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         if (resident.getUserType().equalsIgnoreCase("resident")) {
-            menu.getItem(R.id.map).setVisible(false);
+            menu.findItem(R.id.map).setVisible(false);
         }else if (resident.getUserType().equalsIgnoreCase("guard")) {
-            menu.getItem(R.id.notification).setVisible(false);
+            menu.findItem(R.id.notification).setVisible(false);
         }
         return true;
     }
