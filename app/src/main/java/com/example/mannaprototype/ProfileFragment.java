@@ -28,6 +28,8 @@ import java.util.UUID;
 
 public class ProfileFragment extends Fragment {
 //    Initialization
+    TextView resident_name;
+    TextView address;
     TextView etInput;
     ImageView ivOutput;
     ResidentModel resident;
@@ -44,10 +46,15 @@ public class ProfileFragment extends Fragment {
 
         resident = (ResidentModel) getActivity().getIntent().getSerializableExtra("resident");
 
-
+        resident_name = view.findViewById(R.id.resident_name);
+        address = view.findViewById(R.id.resident_address);
         etInput = view.findViewById(R.id.resident_qrcode);
-//        etInput.setText(UUID.randomUUID().toString().toUpperCase());
+
+        resident_name.setText(resident.getFullName());
+        address.setText(resident.getBlockAndLot());
         etInput.setText(resident.getIdNumber());
+
+//        etInput.setText(UUID.randomUUID().toString().toUpperCase());
         ivOutput = view.findViewById(R.id.iv_output);
         qrCodeGenerator();
         return view;

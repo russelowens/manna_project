@@ -30,21 +30,23 @@
         android:text="Johnny Sins"
         android:textSize="25dp"
         android:gravity="center"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:id="@+id/resident_name"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Block 10 Lot 1"
         android:textSize="20dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:id="@+id/resident_address"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sinai Street"
-        android:textSize="20dp"
-        android:gravity="center"/>
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Sinai Street"-->
+<!--        android:textSize="20dp"-->
+<!--        android:gravity="center"/>-->
 
     <TextView
         android:layout_width="match_parent"
@@ -54,6 +56,7 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:textStyle="bold"
+        android:visibility="gone"
         android:id="@+id/resident_qrcode"/>
 
     <ImageView
