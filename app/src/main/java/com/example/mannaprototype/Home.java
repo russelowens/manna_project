@@ -110,6 +110,7 @@ public class Home extends AppCompatActivity {
             menu.findItem(R.id.btnprofile).setVisible(false);
         }
 
+        initResidents();
         FirebaseFirestore.getInstance().collection("notifications")
                 .whereEqualTo("resident_id", FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .orderBy("timestamp", Query.Direction.DESCENDING)
@@ -209,26 +210,20 @@ public class Home extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    protected void onStart() {
+    private void initResidents() {
         FirebaseFirestore.getInstance().collection("residents")
                 .whereEqualTo("userType", "Resident")
                 .whereEqualTo("status", "IN")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
-                        residentModels.clear();
-                        task.getResult().getDocuments().forEach(documentSnapshot -> {
-                            ResidentModel resident = documentSnapshot.toObject(ResidentModel.class);
-                            if (resident != null) {
-                                resident.setIdNumber(documentSnapshot.getId());
-                            }
+                .addSnapshotListener((value, error) -> {
+                    residentModels.clear();
+                    if (value != null && value.size() > 0) {
+                        value.forEach(queryDocumentSnapshot -> {
+                            ResidentModel resident = queryDocumentSnapshot.toObject(ResidentModel.class);
+                            resident.setIdNumber(queryDocumentSnapshot.getId());
                             residentModels.add(resident);
                         });
                     }
                 });
-
-        super.onStart();
     }
 
     public void printDifference(Date startDate, Date endDate) {

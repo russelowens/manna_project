@@ -74,7 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                    if (task.isComplete() && task.isSuccessful() && task.getResult() != null) {
                        ResidentModel resident = task.getResult().toObject(ResidentModel.class);
-                       openActivity2(resident);
+                       if(resident != null) {
+                           resident.setDateTime(null);
+                           openActivity2(resident);
+                       }else {
+                           mAuth.signOut();
+                       }
                    }else {
                        Toast.makeText(this, "No existing user found", Toast.LENGTH_LONG).show();
                    }
